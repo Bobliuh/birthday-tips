@@ -1,0 +1,77 @@
+import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+public class WarmTip {
+
+    private static final List<String> tips = Arrays.asList(
+            "生日快乐","轩哥生日快乐","Happy birthday!"
+    );
+
+    private static final List<Color> bgColors = Arrays.asList(
+            new Color(255, 182, 193), // lightpink
+            new Color(135, 206, 235), // skyblue
+            new Color(144, 238, 144), // lightgreen
+            new Color(230, 230, 250), // lavender
+            new Color(255, 255, 224), // lightyellow
+            new Color(139, 69, 19),   // plum
+            new Color(255, 127, 80),  // coral
+            new Color(255, 228, 196), // bisque
+            new Color(127, 255, 212), // aquamarine
+            new Color(255, 228, 225), // mistyrose
+            new Color(240, 255, 240), // honeydew
+            new Color(230, 184, 183), // lavenderblush
+            new Color(253, 245, 230)  // oldlace
+    );
+
+    public static void main(String[] args) {
+        for(int i = 1;i<100;i++) {
+            showWarmTip();
+        }
+    }
+
+    public static void showWarmTip() {
+        // 创建窗口
+        JFrame window = new JFrame("祝");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // 获取屏幕宽高
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        // 窗口大小
+        int windowWidth = 250;
+        int windowHeight = 60;
+
+        // 随机窗口位置
+        Random random = new Random();
+        int x = random.nextInt(screenWidth - windowWidth);
+        int y = random.nextInt(screenHeight - windowHeight);
+
+        // 设置窗口位置和大小
+        window.setBounds(x, y, windowWidth, windowHeight);
+
+        // 随机选择提示文字
+        String tip = tips.get(random.nextInt(tips.size()));
+
+        // 随机选择背景颜色
+        Color bgColor = bgColors.get(random.nextInt(bgColors.size()));
+
+        // 创建标签并显示文字
+        JLabel label = new JLabel(tip);
+        label.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBackground(bgColor);
+        label.setForeground(Color.BLACK);
+
+        // 添加标签到窗口
+        window.getContentPane().add(label);
+
+        // 显示窗口
+        window.setVisible(true);
+    }
+}
